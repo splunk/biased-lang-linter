@@ -1,5 +1,6 @@
 name: detecting-biased-language
 on: [push]
+runs-on: ubuntu-latest
 jobs:
     Detect-Biased-language:
         steps:
