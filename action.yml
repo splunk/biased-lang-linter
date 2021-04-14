@@ -3,7 +3,6 @@ description: 'lint for biased lang'
 runs:
     using: 'composite'
     steps:
-        - uses: actions/checkout@master
         - run: pwd
         - run: echo "SECRET"
 # jobs:
