@@ -5,6 +5,7 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - env:
-              HANNIBAL_TOKEN: ${{secrets.PINK_PANTHER_HANNIBAL_TOKEN_D04092021}}
+              # HANNIBAL_TOKEN: ${{secrets.PINK_PANTHER_HANNIBAL_TOKEN_D04092021}}
             - run: pwd
-            - run: echo "SECRET ${{env.HANNIBAL_TOKEN}}"
+            - run: echo "SECRET"
+            # - run: echo ${{env.HANNIBAL_TOKEN}}
