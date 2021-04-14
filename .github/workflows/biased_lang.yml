@@ -1,7 +1,0 @@
-name: detecting-biased-language
-on: [push]
-jobs:
-    Detect-Biased-language:
-        runs-on: ubuntu-latest
-        steps:
-            - run: echo "SECRET ${{secrets.PINK_PANTHER_HANNIBAL_TOKEN_D04092021}}"
