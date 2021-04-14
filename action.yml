@@ -4,7 +4,9 @@ runs:
     using: 'composite'
     steps:
         - run: pwd
-        - run: echo "SECRET"
+          shell: bash
+        - run: echo "SECRET ${{inputs.hannibal-token}}"
+          shell: bash
 # jobs:
 #     Detect-Biased-language:
 #         runs-on: ubuntu-latest
