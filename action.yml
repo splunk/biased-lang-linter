@@ -1,11 +1,18 @@
 name: detecting-biased-language
-jobs:
-    Detect-Biased-language:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-            - env:
-              # HANNIBAL_TOKEN: ${{secrets.PINK_PANTHER_HANNIBAL_TOKEN_D04092021}}
-            - run: pwd
-            - run: echo "SECRET"
-            # - run: echo ${{env.HANNIBAL_TOKEN}}
+description: 'lint for biased lang'
+runs:
+    using: 'composite'
+    steps:
+        - uses: actions/checkout@master
+        - run: pwd
+        - run: echo "SECRET"
+# jobs:
+#     Detect-Biased-language:
+#         runs-on: ubuntu-latest
+#         steps:
+#             - uses: actions/checkout@master
+#             # - env:
+#             # HANNIBAL_TOKEN: ${{secrets.PINK_PANTHER_HANNIBAL_TOKEN_D04092021}}
+#             - run: pwd
+#             - run: echo "SECRET"
+#             # - run: echo ${{env.HANNIBAL_TOKEN}}
