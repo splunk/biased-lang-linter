@@ -3,8 +3,6 @@ description: 'lint for biased lang'
 inputs:
     hannibal-token:
         description: 'Access token'
-        required: true
-        default: ${{secrets.PINK_PANTHER_HANNIBAL_TOKEN_D04092021}}
 runs:
     using: 'composite'
     steps:
