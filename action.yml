@@ -11,6 +11,9 @@ runs:
         - name: Log into registry
           run: echo "${{inputs.repo-token}}" | docker login ghcr.io -u ${{github.actor}} --password-stdin
           shell: bash
-        - run: echo "TOKEN ${{inputs.repo-token}}"
+        - name: Download Pink Panther image
+          uses: ghcr.io/lng-org/biased_lang:v1.test
           shell: bash
         # - uses: docker:ghcr.io/lng-org/biased_lang:v1.test
+        - run: ls
+          shell: bash
