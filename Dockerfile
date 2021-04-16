@@ -1,4 +1,4 @@
-FROM ghcr.io/lng-org/biased_lang:v1.test
+FROM lng88/biased_lang:v1.test
 
 WORKDIR /pink-panther
 
