@@ -16,7 +16,7 @@ runs:
           shell: bash
         - run: pwd
           shell: bash
-        - run: ls
+        - run: docker ps
           shell: bash
         - run: echo "HELLO"
           shell: bash
