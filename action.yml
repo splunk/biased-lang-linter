@@ -23,3 +23,6 @@ runs:
     image: 'Dockerfile'
     env:
         repo: $GITHUB_WORKSPACE
+    args:
+        - 'foo'
+        - 'bar'
