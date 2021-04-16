@@ -21,3 +21,4 @@ inputs:
 runs:
     using: 'docker'
     image: 'Dockerfile'
+    entrypoint: 'python3 run_json.py --mode=check --path=$GITHUB_WORKSPACE'
