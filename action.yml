@@ -17,6 +17,7 @@ runs:
         # - uses: docker:ghcr.io/lng-org/biased_lang:v1.test
         - run: ls
           shell: bash
+runs:
     using: 'docker'
     image: 'docker://ghcr.io/lng-org/biased_lang:v1.test'
     steps:
