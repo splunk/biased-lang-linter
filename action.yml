@@ -16,6 +16,6 @@ inputs:
 runs:
     using: 'docker'
     image: 'docker://ghcr.io/lng-org/biased_lang:v1.test'
-    steps:
-        - run: ls
-          shell: bash
+    # steps:
+    #     - run: ls
+    #       shell: bash
