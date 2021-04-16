@@ -5,24 +5,21 @@ inputs:
         description: 'Access token'
     repo-token:
         description: 'Github token'
-runs:
-    using: 'composite'
-    steps:
-        - name: Log into registry
-          run: echo "${{inputs.repo-token}}" | docker login ghcr.io -u ${{github.actor}} --password-stdin
-          shell: bash
-        - name: Pull docker image
-          run: docker run ghcr.io/lng-org/biased_lang:v1.test
-          shell: bash
-        - run: pwd
-          shell: bash
-        - run: docker ps
-          shell: bash
-        - run: echo "HELLO"
-          shell: bash
 # runs:
-# using: 'docker'
-# image: 'docker://ghcr.io/lng-org/biased_lang:v1.test'
-# steps:
-#     - run: ls
-#       shell: bash
+#     using: 'composite'
+#     steps:
+#         - name: Log into registry
+#           run: echo "${{inputs.repo-token}}" | docker login ghcr.io -u ${{github.actor}} --password-stdin
+#           shell: bash
+#         - name: Pull docker image
+#           run: docker run ghcr.io/lng-org/biased_lang:v1.test
+#           shell: bash
+#         - run: pwd
+#           shell: bash
+#         - run: docker ps
+#           shell: bash
+#         - run: echo "HELLO"
+#           shell: bash
+runs:
+    using: 'docker'
+    image: 'Dockerfile'
