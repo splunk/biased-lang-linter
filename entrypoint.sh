@@ -1,5 +1,9 @@
 #!/bin/sh
 cd /pink-panther
+
+exec ls
+exec pwd
+
 python3 run_json.py \
 --mode=check \
 --path=${GITHUB_WORKSPACE} \
