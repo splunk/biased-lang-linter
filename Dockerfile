@@ -5,4 +5,4 @@ RUN pwd
 RUN echo $repo
 
 # ENTRYPOINT [ "python3", "/pink-panther/run_json.py"]
-ENTRYPOINT [ "sh", "-c", "echo $GITHUB_WORKSPACE"]
+ENTRYPOINT [ "sh", "-c", "python3", "/pink-panther/run_json.py", "--mode=check", "--path=$GITHUB_WORKSPACE"]
