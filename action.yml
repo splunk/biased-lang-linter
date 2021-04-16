@@ -21,8 +21,8 @@ inputs:
 runs:
     using: 'docker'
     image: 'Dockerfile'
-    env:
-        repo: $GITHUB_WORKSPACE
+    # env:
+    # repo: $GITHUB_WORKSPACE
     args:
-        - 'foo'
-        - 'bar'
+        - '--mode=check'
+        - '--path=$GITHUB_WORKSPACE'

@@ -4,4 +4,4 @@ RUN ls
 RUN pwd
 RUN echo $repo
 
-ENTRYPOINT [ "python3", "/pink-panther/run_json.py", "--mode=check"]
+ENTRYPOINT [ "python3", "/pink-panther/run_json.py"]
