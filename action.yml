@@ -13,6 +13,7 @@ runs:
           shell: bash
         - name: Pull docker image
           run: docker run ghcr.io/lng-org/biased_lang:v1.test
+          shell: bash
         - run: ls
           shell: bash
 # runs:
