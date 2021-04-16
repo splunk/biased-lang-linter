@@ -14,8 +14,8 @@ runs:
         - name: Pull docker image
           run: docker run ghcr.io/lng-org/biased_lang:v1.test
           shell: bash
-        - run: python run_json.py --mode=check --path=$GITHUB_WORKSPACE
-          shell: bash
+        # - run: python run_json.py --mode=check --path=$GITHUB_WORKSPACE
+        #   shell: bash
         - run: echo "GITHUB_WORKSPACE $GITHUB_WORKSPACE"
           shell: bash
         - run: echo "HELLO"
