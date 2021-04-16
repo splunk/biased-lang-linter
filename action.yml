@@ -23,6 +23,6 @@ runs:
     image: 'Dockerfile'
     # env:
     # repo: $GITHUB_WORKSPACE
-    args:
-        - '--mode=check'
-        - '--path=$GITHUB_WORKSPACE'
+    # args:
+    #     - '--mode=check'
+    #     - '--path=$GITHUB_WORKSPACE'
