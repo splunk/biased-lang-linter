@@ -12,4 +12,3 @@ python3 run_json.py \
 --excluded_files_path=pink-panther/.excluded_files \
 --err_file=err_biased_lang.log \
 --splunk_logs
---github
