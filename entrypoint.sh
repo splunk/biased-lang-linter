@@ -11,5 +11,5 @@ python3 run_json.py \
 --excluded_dirs_path=.excluded_dirs \
 --excluded_files_path=.excluded_files \
 --err_file=err_biased_lang.log \
---splunk_logs \
+--splunk \
 --github_repo=${GITHUB_REPOSITORY}
