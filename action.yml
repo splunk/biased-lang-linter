@@ -13,3 +13,4 @@ runs:
     using: 'composite'
     steps:
         - run: echo ${{inputs.token}}
+          shell: bash
