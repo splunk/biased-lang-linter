@@ -10,6 +10,6 @@ inputs:
 #     image: 'Dockerfile'
 runs:
     using: 'docker'
-    image: 'ghcr.io://biased_lang:v1.test'
+    image: 'docker://ghcr.io/lng-org/biased_lang:v1.test'
 # runs:
 #     using: 'composite'
