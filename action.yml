@@ -1,9 +1,7 @@
 name: detecting-biased-language
 description: 'lint for biased lang'
 inputs:
-    hannibal-token:
-        description: 'Access token'
-    repo-token:
+    token:
         description: 'Github token'
 # runs:
 #     using: 'docker'
