@@ -5,6 +5,11 @@ inputs:
         description: 'Access token'
     repo-token:
         description: 'Github token'
+# runs:
+#     using: 'docker'
+#     image: 'Dockerfile'
 runs:
     using: 'docker'
-    image: 'Dockerfile'
+    image: 'ghcr.io/lng-org/biased_lang:v1.test'
+# runs:
+#     using: 'composite'
