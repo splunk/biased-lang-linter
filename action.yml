@@ -18,5 +18,5 @@ runs:
           shell: bash
         - run: docker images
           shell: bash
-        - run: docker run lng-org/biased_lang:v1.test
+        - run: docker run ghcr.io/lng-org/biased_lang:v1.test
           shell: bash
