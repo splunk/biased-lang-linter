@@ -2,7 +2,13 @@ name: detecting-biased-language
 description: 'lint for biased lang'
 inputs:
     token:
-        description: 'Github token'
+        description: 'Github Token'
+    path:
+        description: 'Project Path'
+    url:
+        description: 'Project URL'
+    repo:
+        description: 'Project Repo'
 # runs:
 #     using: 'docker'
 #     image: 'Dockerfile'
@@ -16,7 +22,7 @@ runs:
           shell: bash
         - run: docker pull ghcr.io/lng-org/biased_lang:v1.test
           shell: bash
-        - run: echo ${{GITHUB_REPOSITORY}}
+        - run: echo ${{inputs.path}}
           shell: bash
         - run: docker run ghcr.io/lng-org/biased_lang:v1.test
           shell: bash
