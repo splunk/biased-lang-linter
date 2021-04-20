@@ -16,7 +16,7 @@ runs:
           shell: bash
         - run: docker pull ghcr.io/lng-org/biased_lang:v1.test
           shell: bash
-        - run: docker images
+        - run: echo ${{GITHUB_REPOSITORY}}
           shell: bash
         - run: docker run ghcr.io/lng-org/biased_lang:v1.test
           shell: bash
