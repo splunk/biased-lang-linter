@@ -12,5 +12,9 @@ inputs:
 runs:
     using: 'composite'
     steps:
-        - run: echo ${{inputs.token}}
+        - run: echo "${{inputs.token}}" | docker login ghcr.io -u ${{github.actor}} --password-stdin
+          shell: bash
+        - run: docker pull ghcr.io/lng-org/biased_lang:v1.test
+          shell: bash
+        - run: docker run biased_lang:v1.test
           shell: bash
