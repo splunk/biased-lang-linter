@@ -6,8 +6,10 @@ inputs:
 # runs:
 #     using: 'docker'
 #     image: 'Dockerfile'
-runs:
-    using: 'docker'
-    image: 'docker://ghcr.io/lng-org/biased_lang:v1.test'
 # runs:
-#     using: 'composite'
+#     using: 'docker'
+#     image: 'docker://ghcr.io/lng-org/biased_lang:v1.test'
+runs:
+    using: 'composite'
+    steps:
+        - run: echo ${{inputs.token}}
