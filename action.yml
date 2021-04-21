@@ -24,5 +24,9 @@ runs:
           shell: bash
         - run: echo ${{inputs.path}}
           shell: bash
-        - run: docker run ghcr.io/lng-org/biased_lang:v1.test
+        - run: docker run \
+              -e GITHUB_WORKSPACE=${{inputs.path}} \
+              -e GITHUB_URL=${{inputs.url}} \
+              -e GITHUB_REPO=${{inputs.repo}} \
+              ghcr.io/lng-org/biased_lang:v1.test
           shell: bash
