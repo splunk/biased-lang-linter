@@ -9,12 +9,6 @@ inputs:
         description: 'Project URL'
     repo:
         description: 'Project Repo'
-# runs:
-#     using: 'docker'
-#     image: 'Dockerfile'
-# runs:
-#     using: 'docker'
-#     image: 'docker://ghcr.io/lng-org/biased_lang:v1.test'
 runs:
     using: 'composite'
     steps:
@@ -22,9 +16,5 @@ runs:
           shell: bash
         - run: docker pull ghcr.io/lng-org/biased_lang:v2.test
           shell: bash
-        - run: echo ${{inputs.path}}
-          shell: bash
         - run: docker run --name pinkpanther -v ${{inputs.path}}:/biased_lang -e GITHUB_URL=${{inputs.url}} -e GITHUB_REPO=${{inputs.repo}} ghcr.io/lng-org/biased_lang:v2.test
-          shell: bash
-        - run: docker logs -f pinkpanther
           shell: bash
