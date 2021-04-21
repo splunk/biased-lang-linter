@@ -14,7 +14,7 @@ runs:
     steps:
         - run: echo "${{inputs.token}}" | docker login ghcr.io -u ${{github.actor}} --password-stdin
           shell: bash
-        - run: docker pull ghcr.io/lng-org/biased_lang:v2.test
+        - run: docker pull ghcr.io/splunk/biased_lang:v2.test
           shell: bash
-        - run: docker run --name pinkpanther -v ${{inputs.path}}:/biased_lang -e GITHUB_URL=${{inputs.url}} -e GITHUB_REPO=${{inputs.repo}} ghcr.io/lng-org/biased_lang:v2.test
+        - run: docker run -v ${{inputs.path}}:/biased_lang -e GITHUB_URL=${{inputs.url}} -e GITHUB_REPO=${{inputs.repo}} ghcr.io/lng-org/biased_lang:v2.test
           shell: bash
