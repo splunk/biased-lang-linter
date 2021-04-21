@@ -10,7 +10,7 @@ This repo includes the GitHub Action that other GitHub projects will call on. If
 
 1. If your project doesn't have a GitHub Actions workflow, follow steps [here](https://docs.github.com/en/actions/quickstart#creating-your-first-workflow) to create one.
 
-2. Copy the job below into your `.github/workflows/` yml file.
+2. Copy the job below into your `.github/workflows/` yml file as a job.
 
 ```sh
 biased_lang:
