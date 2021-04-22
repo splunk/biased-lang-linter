@@ -4,13 +4,18 @@
 
 Pink Panther is a light framework that programatically checks for biased language in a code repository.
 
-This repo includes the GitHub Action that other GitHub projects will call on. If you are looking for the main code repository or the Dockerfile that builds the `biased_lang` image, please visit [http://go/pinkpanther](http://go/pinkpanther).
-
+This repo includes the GitHub Action that other GitHub projects will call on.
 # Quickstart
 
 1. If your project doesn't have a GitHub Actions workflow, follow steps [here](https://docs.github.com/en/actions/quickstart#creating-your-first-workflow) to create one.
+   1. You must have at least these 3 lines
+```
+name: Github Actions
+on: [push]
+jobs:
+```
 
-2. Copy the job below into your `.github/workflows/` yml file as a job.
+2. Copy the job below into your `.github/workflows/` yml file into the `jobs` section.
 
 ```sh
 biased_lang:
