@@ -12,9 +12,11 @@ inputs:
 runs:
     using: 'composite'
     steps:
-        - run: echo "${{inputs.token}}" | docker login ghcr.io -u ${{github.actor}} --password-stdin
+        - run: echo $GITHUB_WORKSPACE $GITHUB_SERVER_URL $GITHUB_REPOSITORY
           shell: bash
-        - run: docker pull ghcr.io/splunk/biased_lang
-          shell: bash
-        - run: docker run -v ${{inputs.path}}:/biased_lang -e GITHUB_URL=${{inputs.url}} -e GITHUB_REPO=${{inputs.repo}} ghcr.io/splunk/biased_lang
-          shell: bash
+        # - run: echo "${{inputs.token}}" | docker login ghcr.io -u ${{github.actor}} --password-stdin
+        #   shell: bash
+        # - run: docker pull ghcr.io/splunk/biased_lang
+        #   shell: bash
+        # - run: docker run -v ${{inputs.path}}:/biased_lang -e GITHUB_URL=${{inputs.url}} -e GITHUB_REPO=${{inputs.repo}} ghcr.io/splunk/biased_lang
+        #   shell: bash
