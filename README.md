@@ -29,9 +29,6 @@ biased_lang:
         uses: splunk/pink-panther@main
         with:
           token: ${{secrets.GITHUB_TOKEN}}
-          path: $GITHUB_WORKSPACE
-          url: $GITHUB_SERVER_URL
-          repo: $GITHUB_REPOSITORY
 ```
 
 3. Commit your changes
