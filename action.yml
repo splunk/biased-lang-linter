@@ -3,12 +3,6 @@ description: 'lint for biased lang'
 inputs:
     token:
         description: 'Github Token'
-    path:
-        description: 'Project Path'
-    url:
-        description: 'Project URL'
-    repo:
-        description: 'Project Repo'
 runs:
     using: 'composite'
     steps:
