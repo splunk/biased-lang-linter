@@ -27,8 +27,6 @@ biased_lang:
       - uses: actions/checkout@v2
       - id: pink-panther
         uses: splunk/pink-panther@main
-        with:
-          token: ${{secrets.GITHUB_TOKEN}}
 ```
 
 3. Commit your changes
