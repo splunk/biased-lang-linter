@@ -1,8 +1,5 @@
 name: detecting-biased-language
 description: 'lint for biased lang'
-inputs:
-    token:
-        description: 'Github Token'
 runs:
     using: 'composite'
     steps:
