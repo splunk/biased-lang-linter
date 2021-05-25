@@ -1,0 +1,12 @@
+env
+check.sh
+fix.sh
+.DS_Store
+__pycache__
+.pytest_cache
+.custom_dirs
+.custom_files
+err_biased_lang.log
+biased_language.log
+biased-language-summary.json
+biased-language.codeclimate.json

@@ -1,0 +1,6 @@
+ripgrepy
+splunk-hec-handler==1.1.0
+pytest
+pytest-mock
+binaryornot
+requests

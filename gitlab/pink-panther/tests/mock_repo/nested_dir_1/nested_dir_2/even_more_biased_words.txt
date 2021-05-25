@@ -1,0 +1,7 @@
+  master:
+    slave:
+      whitelist:
+        blacklist:
+
+whitelist
+blacklist

@@ -1,0 +1,34 @@
+# This yml file is strictly for testing Pink Panther Docker image
+# pulled from cloud artifactory. To test, include this file in another
+# Gitlab repo's .gitlab-ci.yml file. 
+
+Detecting Biased Language:
+    needs: []
+    before_script: []
+    stage: biased_lang
+    image: docker.repo.splunkdev.net/eng-effectiveness/ci-container-biased-lang-test:python-3.7-buster
+    variables:
+        src_url: '${CI_PROJECT_URL}'
+        src_path: '${CI_PROJECT_DIR}'
+        hec_token: ${PINK_PANTHER_HANNIBAL_TOKEN_D01132021}
+    script:
+        - cd /pink-panther
+        - > 
+          python -u run_json.py --path=${src_path} --url=${src_url} --mode=check --excluded_dirs_path=.excluded_dirs
+          --excluded_files_path=.excluded_files --err_file err_biased_lang.log --splunk --splunk_logs --splunk_token=${hec_token}
+        - mv biased-language-summary.json ${src_path}
+        - mv biased-language.codeclimate.json ${src_path}
+        - mv biased_language.log ${src_path}
+        - "[ ! -f err_biased_lang.log ] || (echo 'Error: Biased words found. Replacement(s) required.' && exit 1)"
+    dependencies: []
+    except:
+        - tags
+    artifacts:
+        reports:
+            codequality: biased-language.codeclimate.json
+        paths:
+            - biased-language.codeclimate.json
+            - biased-language-summary.json
+            - biased_language.log
+        when: always
+    allow_failure: false

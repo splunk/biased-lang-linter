@@ -1,0 +1,26 @@
+FROM python:3.7-buster
+
+WORKDIR /pink-panther
+
+ENV GITHUB_WORKSPACE=/biased_lang
+ENV GITHUB_URL=$GITHUB_URL
+ENV GITHUB_REPO=$GITHUB_REPO
+
+# Install basic requirements
+RUN apt-get update && \
+  apt-get install -y --no-install-recommends \
+  wget \
+  make \
+  git \
+  ripgrep \
+  && rm -rf /var/lib/apt/lists/* \
+  && apt-get clean all
+
+# copy dependency file first for Dockerfile caching
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
+
+COPY . .
+
+CMD [ "python3", "run_json.py", "--mode=check", "--splunk", "--excluded_dirs_path=.excluded_dirs", "--excluded_files_path=.excluded_files", "--err_file=err_biased_lang.log" ]
