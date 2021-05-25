@@ -1,4 +1,0 @@
-master,"main,primary"
-blacklist,blocklist
-whitelist,allowlist
-slave,worker
