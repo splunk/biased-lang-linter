@@ -1,6 +1,5 @@
 # pink-panther
 
-![Banner](static/banner.jpg)
 
 Pink Panther is a light framework that programatically checks for biased language in a code repository.
 
