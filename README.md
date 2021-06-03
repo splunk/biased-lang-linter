@@ -1,7 +1,7 @@
-# pink-panther
+# Description
 
 
-Pink Panther is a light framework that programatically checks for biased language in a code repository.
+This is a linter that checks for biased language in a code repository.
 
 This repo includes the GitHub Action that other GitHub projects will call on.
 
