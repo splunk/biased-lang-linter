@@ -36,29 +36,4 @@ Congratulations! Pink Panther is ready to use in GitHub Actions
 
 ## Excluding directories and files
 
-To exclude certain directories and files in your repo from the scan, add these custom files to specify which directories and/or files you wish to exclude:
-
-- Any directories in an `.excluded_dirs` file will contain the names of directories that will be recursively excluded.
-- Likewise, the `.excluded_files` file will contain the names of files that will be excluded.
-
-Include the path to these files in the and `--excluded_dirs_path` and `--excluded_files_path` arguments, respectively.
-Note that these paths are relative to the main path provided to `--path`.
-Filetypes to ignore can be added as `*.extension`.
-**Caution:** Please do not include any empty lines in these files. Each line of the file represents something to ignore in the search.
-
-Examples:
-
-```sh
-# .excluded_dirs
-node_modules
-build
-env
-.git
-```
-
-```sh
-# .excluded_files
-README.md
-*.test.js
-build/index.js
-```
+WIP
