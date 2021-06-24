@@ -1,0 +1,4 @@
+master,Master
+slave,Slave
+blacklist,BlackList
+whitelist,WhiteList
