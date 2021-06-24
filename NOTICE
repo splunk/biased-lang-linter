@@ -1,0 +1,23 @@
+Biased Lang Linter
+Copyright 2021 Splunk Inc.
+
+This product includes software developed at
+Splunk Inc (https://www.splunk.com/).
+
+Portions of this software were developed by third party developers:
+  
+- name: binaryornot
+  repo: https://github.com/audreyfeldroy/binaryornot
+  license: BSD-3
+
+- name: coverage
+  package: https://pypi.org/project/coverage/
+  license: Apache 2.0
+
+- name: pytest
+  package: https://docs.pytest.org/en/6.2.x/index.html
+  license: MIT
+
+- name: requests
+  package: https://pypi.org/project/requests/
+  license: Apache 2.0

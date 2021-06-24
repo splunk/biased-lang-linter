@@ -1,0 +1,5 @@
+
+.git
+node_modules
+__pycache__
+nested_dir_1/**/excluded_dir
