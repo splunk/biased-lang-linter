@@ -24,8 +24,9 @@ biased_lang:
     name: Detecting Biased Language
     steps:
       - uses: actions/checkout@v2
-      - id: pink-panther
-        uses: splunk/pink-panther@main
+      - id: biased-lang
+        uses: splunk/biased-lang-linter@main
+        continue-on-error: true
 ```
 
 3. Commit your changes
