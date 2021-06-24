@@ -48,7 +48,7 @@ jobs:
     name: Detecting Biased Language
     steps:
       - uses: actions/checkout@v2
-      - id: biased-lang
+      - id: biased-lang-linter
         uses: splunk/biased-lang-linter@main
         continue-on-error: true
 ```
