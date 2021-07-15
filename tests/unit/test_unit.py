@@ -190,7 +190,7 @@ def test_get_splunk_hec_info():
 def test_event2splunk(mocker):
     logger = BiasedLanguageLogger(
         name='UnitTesting', filename='UnitTesting.log')
-    hec = get_hannibal_hec_info('invalid-token')
+    hec = get_hannibal_hec_info('valid-token')
     event2splunk = Event2Splunk(hec, logger)
     mocker.patch('tools.event2splunk.Event2Splunk._send_batch')
     event2splunk.post_event(payload={}, source='testing', sourcetype='testing')

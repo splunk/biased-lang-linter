@@ -23,7 +23,8 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.7'
-      - run: |
+      - name: pytest biased-lang
+        run: |
           sudo apt-get update -qy
           sudo apt-get install ripgrep
           pip3 install -r requirements.txt

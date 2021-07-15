@@ -39,6 +39,8 @@ config.read('splunk_configs.ini')
 def get_hannibal_hec_info(token):
     if not token:
         raise Exception('No Splunk HEC token provided for Hannibal')
+    if not config['hannibal']:
+        raise Exception('No Hannibal config provided')
     return {
         'hec_host': config['hannibal']['host'],
         'hec_port': config['hannibal']['port'],
@@ -51,6 +53,8 @@ def get_hannibal_hec_info(token):
 def get_pzero_hec_info(token):
     if not token:
         raise Exception('No Splunk HEC token provided for PZero')
+    if not config['pzero']:
+        raise Exception('No Pzero config provided')
     return {
         'hec_host': config['pzero']['host'],
         'hec_port': config['pzero']['port'],
