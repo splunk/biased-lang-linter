@@ -45,4 +45,4 @@ jobs:
           with:
             file: Dockerfile.gh
             push: true
-            tags: splunk/biased-lang-linter:test-1.0.0
+            tags: splunk/biased_lang:test-1.0.0
