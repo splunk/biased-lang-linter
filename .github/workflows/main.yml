@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License
 
-# Update 'on' to be conditional per job
+#TODO: Update 'on' to be conditional per job
 on: push
 
 jobs:
@@ -23,10 +23,27 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.7'
-      - name: pytest biased-lang
+      - name: Run Pytest
         run: |
           sudo apt-get update -qy
           sudo apt-get install ripgrep
           pip3 install -r requirements.txt
           python3 run_json.py --path=./tests/mock_repo --mode=check --err_file=err_biased_lang.log
           coverage run --omit '/usr/*' -m pytest && coverage report -m
+  github_docker_build_publish_test:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Login to GitHub Container Registry
+          uses: docker/login-action@v1.10
+          with:
+            registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+            logout: true
+        - name: Docker build and push to ghcr.io
+          uses: docker/build-push-action@v2
+          with:
+            context: .
+            file: {context}/Dockerfile.gh
+            push: true
+            tags: splunk/biased_lang:test-1.0.0
