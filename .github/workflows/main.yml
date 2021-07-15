@@ -19,10 +19,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
       - run: |
-          apt-get update -qy
-          apt-get install -y python3.7 python3-pip
-          apt-get install ripgrep
+          sudo apt-get update -qy
+          sudo apt-get install ripgrep
           pip3 install -r requirements.txt
           python3 run_json.py --path=./tests/mock_repo --mode=check --err_file=err_biased_lang.log
           coverage run --omit '/usr/*' -m pytest && coverage report -m
