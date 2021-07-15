@@ -6,7 +6,7 @@ import constants
 from unittest.mock import patch
 from utils import process_and_return_exclusions, is_json, add_lines, rgignore_cleanup
 from utils import get_batch_info, truncate_line, get_source_type, open_csv, get_colors
-from utils import write_file, grab_repo_name, get_splunk_hec_info, TimeFunction, BiasedLanguageLogger
+from utils import write_file, grab_repo_name, get_hannibal_hec_info, TimeFunction, BiasedLanguageLogger
 from utils import get_line_count
 from run_json import main, rg_search, build_args_dict, process_word_occurrences, process_biased_word_line
 from tools.event2splunk import Event2Splunk
@@ -115,7 +115,7 @@ def test_build_args_dict():
     assert args['path'] == mock_repo_path
     assert args['mode'] == 'check'
     assert args['err_file'] == constants.ERR_FILE
-    assert len(args) == 9
+    assert len(args) == 10
 
 
 def test_process_word_occurrences(batch_info):
@@ -183,14 +183,14 @@ def test_exclusions_if_no_exclude_file():
 
 def test_get_splunk_hec_info():
     with pytest.raises(Exception) as no_hec:
-        get_splunk_hec_info(None)
+        get_hannibal_hec_info(None)
     assert "No Splunk HEC token provided" in str(no_hec.value)
 
 
 def test_event2splunk(mocker):
     logger = BiasedLanguageLogger(
         name='UnitTesting', filename='UnitTesting.log')
-    hec = get_splunk_hec_info('invalid-token')
+    hec = get_hannibal_hec_info('invalid-token')
     event2splunk = Event2Splunk(hec, logger)
     mocker.patch('tools.event2splunk.Event2Splunk._send_batch')
     event2splunk.post_event(payload={}, source='testing', sourcetype='testing')
@@ -238,6 +238,7 @@ def test_main(mock_post_event, mock_close_event):
         'enable_logs': False,
         'err_file': constants.ERR_FILE,
         'splunk_token': 'valid-token',
+        'pzero_token': 'valid-token',
         'github_repo': None
     }
     logger = BiasedLanguageLogger(name='test_logger', filename=None)

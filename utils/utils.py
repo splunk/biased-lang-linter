@@ -14,6 +14,7 @@
 
 from binaryornot.check import is_binary
 from copy import copy
+import configparser
 import csv
 from datetime import datetime
 import json
@@ -32,16 +33,30 @@ binaryornot_logger.setLevel('ERROR')
 chardet_logger = logging.getLogger('chardet')
 chardet_logger.setLevel('ERROR')
 
+config = configparser.ConfigParser()
+config.read('splunk_configs.ini')
 
-def get_splunk_hec_info(token):
+def get_hannibal_hec_info(token):
     if not token:
-        raise Exception('No Splunk HEC token provided')
+        raise Exception('No Splunk HEC token provided for Hannibal')
     return {
-        'hec_host': os.environ['splunk_host'],
-        'hec_port': os.environ['splunk_port'],
+        'hec_host': config['hannibal']['host'],
+        'hec_port': config['hannibal']['port'],
         'hec_key': f'Splunk {token}',
-        'hec_index': 'bias_language',
-        'hec_protocol': 'https',
+        'hec_index': config['hannibal']['index'],
+        'hec_protocol': config['hannibal']['protocol'],
+    }
+
+
+def get_pzero_hec_info(token):
+    if not token:
+        raise Exception('No Splunk HEC token provided for PZero')
+    return {
+        'hec_host': config['pzero']['host'],
+        'hec_port': config['pzero']['port'],
+        'hec_key': f'Splunk {token}',
+        'hec_index': config['pzero']['index'],
+        'hec_protocol': config['pzero']['protocol']
     }
 
 
@@ -134,8 +149,8 @@ def write_file(file, content):
         outfile.write('\n')
 
 
-# Grabs the org + repo name if in CI environment- ...engprod/biased-language-linter
-# If run locally, will grab the last two parts of the path- ...splunk/biased-language-linter
+# Grabs the org + repo name if in CI environment- engprod/biased-lang
+# If run locally, will grab the last two parts of the path- splunk/biased-lang
 def grab_repo_name(path):
     subpath = path[:path.rindex('/')]
     if not subpath:

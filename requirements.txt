@@ -1,4 +1,5 @@
-pytest
-binaryornot
-requests
-coverage
+pytest==6.2.2
+pytest-mock==3.5.1
+binaryornot==0.4.0
+requests==2.25.1
+coverage==5.5.0

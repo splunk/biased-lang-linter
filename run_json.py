@@ -16,7 +16,7 @@
 This version of the script is intended to produce a JSON output and used in a CI environment
 like GitHub Actions or GitLab CI.
 
-Note: This Python script only functions in check mode.
+ Note: This Python script only functions in check mode.
 '''
 
 import argparse
@@ -32,8 +32,8 @@ from copy import copy
 from tools.event2splunk import Event2Splunk
 from utils import truncate_line, get_source_type, send_codeclimate_batch
 from utils import open_csv, write_file, TimeFunction, process_and_return_exclusions
-from utils import get_splunk_hec_info, get_colors, get_batch_info, grab_repo_name
-from utils import BiasedLanguageLogger, get_line_count, is_json
+from utils import get_hannibal_hec_info, get_colors, get_batch_info, grab_repo_name
+from utils import BiasedLanguageLogger, get_line_count, is_json, get_pzero_hec_info
 
 c = get_colors()['text']
 
@@ -53,6 +53,7 @@ def build_args_dict(args=None):
     parser.add_argument('--err_file')
     parser.add_argument('--splunk', action='store_true')
     parser.add_argument('--splunk_token')
+    parser.add_argument('--pzero_token')
     parser.add_argument('--github_repo')
     args = parser.parse_args(args)
     # args.path will be passed through GitLab CI and manual runs
@@ -87,6 +88,7 @@ def build_args_dict(args=None):
         'enable_logs': args.splunk_logs,
         'err_file': args.err_file,
         'splunk_token': args.splunk_token,
+        'pzero_token': args.pzero_token,
         'github_repo': os.environ.get('GITHUB_REPO')
     }
 
@@ -209,8 +211,10 @@ def main(args, logger):
     main_timer.start()
     batch_info = get_batch_info()
     if args['splunk_flag'] and not args['github_repo']:
-        hec = get_splunk_hec_info(args['splunk_token'])
+        hec = get_hannibal_hec_info(args['splunk_token'])
+        pzero_hec = get_pzero_hec_info(args['pzero_token'])
         event2splunk = Event2Splunk(hec, logger)
+        pz_event2splunk = Event2Splunk(pzero_hec, logger)
     repo_name = args['github_repo'] if args['github_repo'] else grab_repo_name(
         args['path'])
     source_type = get_source_type(args['url'])
@@ -265,6 +269,8 @@ def main(args, logger):
                 else:
                     send_codeclimate_batch(constants.CODECLIMATE_FILENAME, splunk_events,
                                            repo_name, source_type, event2splunk)
+                    send_codeclimate_batch(constants.CODECLIMATE_FILENAME, splunk_events,
+                                           repo_name, source_type, pz_event2splunk)
 
         else:
             sys.stdout.write('%sBiased Lang Linter %sfound no biased words! 🎉%s\n' % (
@@ -284,6 +290,9 @@ def main(args, logger):
                 event2splunk.post_event(payload=occurrences,
                                         source=repo_name, sourcetype=source_type)
                 event2splunk.close(filename=constants.SUMMARY_FILENAME)
+                pz_event2splunk.post_event(
+                    payload=occurrences, source=repo_name, sourcetype=source_type)
+                pz_event2splunk.close(filename=constants.SUMMARY_FILENAME)
         # For GitHub Actions to provide error annotations
         err_file = args['err_file']
         if os.path.exists(err_file) and args['github_repo']:
