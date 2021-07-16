@@ -59,6 +59,7 @@ def build_args_dict(args=None):
     # args.path will be passed through GitLab CI and manual runs
     # GITHUB_WORKSPACE is env var set in GitHub Actions
     path = args.path or os.environ.get('GITHUB_WORKSPACE')
+    print('path', path)
     if not path:
         raise Exception('No path specified')
     if path.endswith('/'):
