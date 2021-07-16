@@ -57,4 +57,4 @@ jobs:
         - name: Test biased_lang:test image
           run: |
             pip3 install requests
-            python3 check_github.py ${{ secrets.GITHUB_TOKEN }}
+            python3 check_github.py ${{ secrets.AT }}
