@@ -45,7 +45,6 @@ jobs:
         - name: Docker build and push to ghcr.io
           uses: docker/build-push-action@v2
           with:
-            context: .
             file: Dockerfile.gh
             push: true
-            tags: splunk/biased_lang:test
+            tags: ghcr.io/splunk/biased_lang:test
