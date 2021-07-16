@@ -61,17 +61,17 @@ jobs:
   #GitHub Actions currently does not support yaml anchors.
   github_docker_build_publish_prod:
     runs-on: ubuntu-latest
-      steps:
-        - name: Login to GitHub Container Registry
-          uses: docker/login-action@v1.10.0
-          with:
-            registry: ghcr.io
-            username: ${{ github.actor }}
-            password: ${{ secrets.GITHUB_TOKEN }}
-            logout: true
-        - name: Docker build and push test to ghcr.io
-          uses: docker/build-push-action@v2
-          with:
-            file: Dockerfile.gh
-            push: true
-            tags: ghcr.io/splunk/biased_lang:1.0.0
+    steps:
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1.10.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          logout: true
+      - name: Docker build and push test to ghcr.io
+        uses: docker/build-push-action@v2
+        with:
+          file: Dockerfile.gh
+          push: true
+          tags: ghcr.io/splunk/biased_lang:1.0.0
