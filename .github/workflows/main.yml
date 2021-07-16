@@ -46,10 +46,11 @@ jobs:
             file: Dockerfile.gh
             push: true
             tags: ghcr.io/splunk/biased_lang:test
-        - name: Test biased_lang:test image
+        - name: Install Python
           uses: actions/setup-python@v2
           with:
             python-version: '3.7'
+        - name: Test biased_lang:test image
           run: |
             pip3 install requests
             python3 check_github.py ${{ secrets.GITHUB_TOKEN }}
