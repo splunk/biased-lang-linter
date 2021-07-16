@@ -61,6 +61,7 @@ jobs:
   #GitHub Actions currently does not support yaml anchors.
   github_docker_build_publish_prod:
     runs-on: ubuntu-latest
+    needs: github_test
     steps:
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1.10.0
