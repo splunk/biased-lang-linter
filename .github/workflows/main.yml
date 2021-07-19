@@ -94,3 +94,4 @@ jobs:
           file: Dockerfile.gl
           push: true
           tags: ghcr.io/splunk/biased_lang_gitlab:test
+#TODO: Find way to test GitLab side of things

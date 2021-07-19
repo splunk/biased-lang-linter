@@ -14,7 +14,6 @@
 
 from binaryornot.check import is_binary
 from copy import copy
-import configparser
 import csv
 from datetime import datetime
 import json
@@ -33,34 +32,21 @@ binaryornot_logger.setLevel('ERROR')
 chardet_logger = logging.getLogger('chardet')
 chardet_logger.setLevel('ERROR')
 
-config = configparser.ConfigParser()
-config.read('splunk_configs.ini')
-
-def get_hannibal_hec_info(token):
+def get_hec_info(token, endpoint):
     if not token:
-        raise Exception('No Splunk HEC token provided for Hannibal')
-    if not config['hannibal']:
-        raise Exception('No Hannibal config provided')
+        raise Exception('Missing Splunk HEC token')
+    if endpoint is None:
+        raise Exception('Missing Splunk endpoint')
+    
+    endpoint = endpoint.split(':')
+    host = endpoint[0]
+    port = endpoint[1]
     return {
-        'hec_host': config['hannibal']['host'],
-        'hec_port': config['hannibal']['port'],
+        'hec_host': host,
+        'hec_port': port,
         'hec_key': f'Splunk {token}',
-        'hec_index': config['hannibal']['index'],
-        'hec_protocol': config['hannibal']['protocol'],
-    }
-
-
-def get_pzero_hec_info(token):
-    if not token:
-        raise Exception('No Splunk HEC token provided for PZero')
-    if not config['pzero']:
-        raise Exception('No Pzero config provided')
-    return {
-        'hec_host': config['pzero']['host'],
-        'hec_port': config['pzero']['port'],
-        'hec_key': f'Splunk {token}',
-        'hec_index': config['pzero']['index'],
-        'hec_protocol': config['pzero']['protocol']
+        'hec_index': 'bias_language',
+        'hec_protocol': 'https',
     }
 
 

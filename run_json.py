@@ -32,8 +32,8 @@ from copy import copy
 from tools.event2splunk import Event2Splunk
 from utils import truncate_line, get_source_type, send_codeclimate_batch
 from utils import open_csv, write_file, TimeFunction, process_and_return_exclusions
-from utils import get_hannibal_hec_info, get_colors, get_batch_info, grab_repo_name
-from utils import BiasedLanguageLogger, get_line_count, is_json, get_pzero_hec_info
+from utils import get_hec_info, get_colors, get_batch_info, grab_repo_name
+from utils import BiasedLanguageLogger, get_line_count, is_json
 
 c = get_colors()['text']
 
@@ -52,14 +52,15 @@ def build_args_dict(args=None):
     parser.add_argument('--verbose', action='store_true')
     parser.add_argument('--err_file')
     parser.add_argument('--splunk', action='store_true')
+    parser.add_argument('--h_endpoint')
     parser.add_argument('--splunk_token')
+    parser.add_argument('--pz_endpoint')
     parser.add_argument('--pzero_token')
     parser.add_argument('--github_repo')
     args = parser.parse_args(args)
     # args.path will be passed through GitLab CI and manual runs
     # GITHUB_WORKSPACE is env var set in GitHub Actions
     path = args.path or os.environ.get('GITHUB_WORKSPACE')
-    print('path', path)
     if not path:
         raise Exception('No path specified')
     if path.endswith('/'):
@@ -88,7 +89,9 @@ def build_args_dict(args=None):
         'splunk_flag': args.splunk,
         'enable_logs': args.splunk_logs,
         'err_file': args.err_file,
+        'h_endpoint': args.h_endpoint,
         'splunk_token': args.splunk_token,
+        'pz_endpoint': args.pz_endpoint,
         'pzero_token': args.pzero_token,
         'github_repo': os.environ.get('GITHUB_REPO')
     }
@@ -212,12 +215,11 @@ def main(args, logger):
     main_timer.start()
     batch_info = get_batch_info()
     if args['splunk_flag'] and not args['github_repo']:
-        hec = get_hannibal_hec_info(args['splunk_token'])
-        pzero_hec = get_pzero_hec_info(args['pzero_token'])
+        hec = get_hec_info(args['splunk_token'], args['h_endpoint'])
+        pzero_hec = get_hec_info(args['pzero_token'], args['pz_endpoint'])
         event2splunk = Event2Splunk(hec, logger)
         pz_event2splunk = Event2Splunk(pzero_hec, logger)
-    repo_name = args['github_repo'] if args['github_repo'] else grab_repo_name(
-        args['path'])
+    repo_name = args['github_repo'] or grab_repo_name(args['path'])
     source_type = get_source_type(args['url'])
     excluded = process_and_return_exclusions(
         args['path'], constants.EXCLUDE_FILE, constants.RGIGNORE_FILE)
@@ -266,7 +268,7 @@ def main(args, logger):
                 # If ran in GitHub, call endpoint to Splunk data
                 if args['github_repo']:
                     # TODO: Call endpoint to trigger lambda function and firehose
-                    print('Splunking splunk_events!')
+                    print('Posting data to Splunk')
                 else:
                     send_codeclimate_batch(constants.CODECLIMATE_FILENAME, splunk_events,
                                            repo_name, source_type, event2splunk)
