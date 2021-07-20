@@ -6,7 +6,8 @@ This is a code linter that checks for biased language in a code repository. Curr
 2. [Developer Instructions](#developer-instructions)
 3. [Usage Example](#usage-example)
 4. [Excluding directories and files](#excluding-directories-and-files)
-5. [FAQ](#frequently-asked-questions)
+5. [Propose new biased words](#proposing-new-biased-words)
+6. [FAQ](#frequently-asked-questions)
 
 # Quickstart
 
@@ -137,7 +138,11 @@ python3 run_json.py --mode=check --path=/user/jdoe/git/myProject
 
 ## Formatting of word_list.csv
 
-The biased words are listed on a new line. If you would like to propose a new biased word, we will need to 
+The biased words are listed on a new line in the `word_list.csv` file.
+
+## Proposing new biased words
+
+TBD
 
 ## Excluding directories and files
 
@@ -163,4 +168,4 @@ If the pipeline detects biased language anywhere in the repository, the `biased_
 
 ## Learn More
 
-- Write Unbiased Documentation: [Splunk Style Guide](https://docs.splunk.com/Documentation/StyleGuide/current/StyleGuide/Inclusivity)
+- Bias Free Communication: [Splunk Style Guide](https://docs.splunk.com/Documentation/StyleGuide/current/StyleGuide/Inclusivity)

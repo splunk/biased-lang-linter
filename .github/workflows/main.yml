@@ -12,8 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License
 
-#TODO: Update 'on' to be conditional per job
-on: push
+# This will trigger the workflow to run whenever a PR is merged to the main branch
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   test:
