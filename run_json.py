@@ -265,7 +265,7 @@ def main(args, logger):
                 # Splunk the code quality report
                 # If ran in GitHub, call endpoint to Splunk data
                 if args['github_repo']:
-                    # TODO: Call endpoint to trigger lambda function and firehose
+                    # TODO: Call endpoint to post data to Splunk instance
                     print('Posting data to Splunk')
                 else:
                     send_codeclimate_batch(constants.CODECLIMATE_FILENAME, splunk_events,
@@ -285,7 +285,7 @@ def main(args, logger):
             occurrences['run_time'] = main_timer.stop()
             # If ran in GitHub, call endpoint to Splunk data
             if args['github_repo']:
-                # TODO: Call endpoint to trigger lambda function and firehose
+                # TODO: Call endpoint to post data to Splunk instance
                 print('Splunking occurrences data from GitHub!')
             else:
                 event2splunk.post_event(payload=occurrences,

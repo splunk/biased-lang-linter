@@ -96,4 +96,4 @@ jobs:
           tags: |
             ghcr.io/splunk/biased_lang_gitlab:test
             ghcr.io/splunk/biased_lang_gitlab:1.0.0
-#TODO: Find way to test GitLab side of things
+#TODO: Find way to test GitLab side of things, then deploy prod image
