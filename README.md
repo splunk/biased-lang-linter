@@ -6,8 +6,7 @@ This is a code linter that checks for biased language in a code repository. Curr
 2. [Developer Instructions](#developer-instructions)
 3. [Usage Example](#usage-example)
 4. [Excluding directories and files](#excluding-directories-and-files)
-5. [Propose new biased words](#proposing-new-biased-words)
-6. [FAQ](#frequently-asked-questions)
+5. [FAQ](#frequently-asked-questions)
 
 # Quickstart
 
@@ -140,10 +139,6 @@ python3 run_json.py --mode=check --path=/user/jdoe/git/myProject
 
 The biased words are listed on a new line in the `word_list.csv` file.
 
-## Proposing new biased words
-
-TBD
-
 ## Excluding directories and files
 
 The tool automatically excludes a few common directories you would already want to exclude such as `node_modules`, `__pycache__`, and `.git`.
@@ -165,6 +160,10 @@ If the pipeline detects biased language anywhere in the repository, the `biased_
 **Q: I'm including git submodules in my repo and seems to be breaking the workflow, what can I do?**
 
 **A:** You'll need to add your submodule paths in the `.biased_lang_exclude` file. You can find info on how to (exclude files and directories here)[#excluding-directories-and-files]
+
+**Q: How can I search for additional biased terms?**
+
+**A:** You'll have to create a fork of this repo and add your new biased word in `word_list.csv` on a new line. You will also need to update the workflow, `.github/workflows/main.yml`, to publish the Docker image outside of Splunk's organization.
 
 ## Learn More
 
