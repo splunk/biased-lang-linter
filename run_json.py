@@ -48,7 +48,6 @@ def build_args_dict(args=None):
     parser.add_argument('--path')
     parser.add_argument('--url')
     parser.add_argument('--mode')
-    parser.add_argument('--splunk_logs', action='store_true')
     parser.add_argument('--verbose', action='store_true')
     parser.add_argument('--err_file')
     parser.add_argument('--splunk', action='store_true')
@@ -87,7 +86,6 @@ def build_args_dict(args=None):
         'mode': mode,
         'is_verbose': args.verbose,
         'splunk_flag': args.splunk,
-        'enable_logs': args.splunk_logs,
         'err_file': args.err_file,
         'h_endpoint': args.h_endpoint,
         'splunk_token': args.splunk_token,

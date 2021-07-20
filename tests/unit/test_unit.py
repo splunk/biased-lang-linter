@@ -68,7 +68,7 @@ def test_open_csv():
     data = open_csv('word_list.csv')
     assert len(data) == 4
     for w in data:
-        assert len(w) == 2
+        assert len(w) == 1
 
 
 def test_write_file():
@@ -115,7 +115,7 @@ def test_build_args_dict():
     assert args['path'] == mock_repo_path
     assert args['mode'] == 'check'
     assert args['err_file'] == constants.ERR_FILE
-    assert len(args) == 12
+    assert len(args) == 11
 
 
 def test_process_word_occurrences(batch_info):
