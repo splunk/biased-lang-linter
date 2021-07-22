@@ -111,18 +111,17 @@ def test_rg_search():
 def test_build_args_dict():
     extra_slash_path = mock_repo_path + '/'
     args = build_args_dict(
-        [f'--path={extra_slash_path}', '--url=https://cd.splunkdev.com/engprod/biased-lang', '--mode=check', '--err_file=fake_file'])
+        [f'--path={extra_slash_path}', '--url=https://cd.splunkdev.com/engprod/biased-lang', '--err_file=fake_file'])
     assert args['path'] == mock_repo_path
-    assert args['mode'] == 'check'
     assert args['err_file'] == constants.ERR_FILE
-    assert len(args) == 11
+    assert len(args) == 9
 
 
 def test_process_word_occurrences(batch_info):
     biased_word = 'whitelist'
     rg_results = rg_search(biased_word, mock_repo_path)
     json_results, word_report, events = process_word_occurrences(
-        rg_results, batch_info, biased_word, False, mock_repo_path, True)
+        rg_results, batch_info, biased_word, mock_repo_path, True)
     assert json_results['num_matched_lines'] == 4
     assert json_results['num_matched_words'] == 5
     assert json_results['num_matched_files'] == 3

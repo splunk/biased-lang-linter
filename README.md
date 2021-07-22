@@ -76,8 +76,6 @@ Below is a list of arguments you can pass to the CLI tool.
 Note: For the additional arguments you find in `run_json.py` that aren't listed below, they are for internal use.
 
 - **`--path=`** [_**required**_] absolute path to the directory
-- **`--mode=`** [_**required**_] `check` to scan for bias language
-- **`--verbose`** enables explicit logging (only applicable for check mode)
 - **`--err_file=`** sends any error messages to a log file of your choice, in addition to the console
 - **`--splunk`** [_**splunk_required**_] not available yet
 - **`--splunk_token=`** [_**splunk_required**_] not available yet
@@ -101,13 +99,10 @@ python3 run_json.py --mode=check --path=/user/jdoe/git/myProject
 #### biased-language-summary.json
 
 `biased-language-summary.json` contains a summary of which files contain which biased words.
-(With `--verbose`, this output is capable of line-by-line reporting instead of a summary. The GitLab CI uses the summarized version.)
 
 ```sh
 {
     "terms_found": "true" | "false",
-    "mode": "check",
-    "verbose": "true" | "false",
     "total_lines_matched": "295",
     "total_files_matched": "54",
     "total_words_matched": "449",
