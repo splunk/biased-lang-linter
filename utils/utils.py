@@ -67,23 +67,6 @@ def get_colors():
     }
 
 
-def get_colors_sh():
-    return {
-        'text': {
-            'yellow': '\\033[0;33m',
-            'green': '\\033[0;32m',
-            'red': '\\033[0;31m',
-            'lightmagenta': '\\033[0;95m',
-            'orange': '\\033[38;5;172m',
-            'nc': '\\033[0m'
-        },
-        'underline': {
-            'cyan': '\\033[4;36m',
-            'lightmagenta': '\\033[4;95m'
-        }
-    }
-
-
 def get_batch_info():
     year = str(datetime.now().year)
     timezone_offset = time.strftime('%z', time.gmtime())
