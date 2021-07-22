@@ -5,7 +5,7 @@ description: 'lint for biased lang'
 runs:
   using: 'composite'
   steps:
-    - run: docker pull ghcr.io/splunk/biased_lang
+    - run: docker pull ghcr.io/splunk/biased_lang:1.0.0
       shell: bash
-    - run: docker run -v $GITHUB_WORKSPACE:/biased_lang -e GITHUB_URL=$GITHUB_SERVER_URL -e GITHUB_REPO=$GITHUB_REPOSITORY ghcr.io/splunk/biased_lang
+    - run: docker run -v $GITHUB_WORKSPACE:/biased_lang -e GITHUB_URL=$GITHUB_SERVER_URL -e GITHUB_REPO=$GITHUB_REPOSITORY ghcr.io/splunk/biased_lang:1.0.0
       shell: bash
