@@ -132,7 +132,7 @@ def process_word_occurrences(results, batch_info, biased_word, path, splunk_flag
             }
 
             report.append(occurrence)
-            # code quality events - additional details if Splunking
+            # code quality events - additional details posted to Splunk
             if splunk_flag:
                 splunk_info = {
                     'line_truncated': is_truncated,
@@ -173,13 +173,12 @@ def process_biased_word_line(line, occurrences, code_quality_report, splunk_even
             rg_results, batch_info, biased_word, args['path'], args['splunk_flag'])
         terms_found = True
 
-    # add to code quality output and to Splunkable events list
+    # add to code quality output and to Splunk events list
     for report in word_report:
         code_quality_report.append(report)
     if args['splunk_flag']:
         for report in events:
             splunk_events.append(report)
-    # add to stdout json
     copy_occurrences['biased_words'].append(biased_word)
     copy_occurrences[biased_word] = json_results
 
@@ -200,7 +199,6 @@ def main(args, logger):
         args['path'], constants.EXCLUDE_FILE, constants.RGIGNORE_FILE)
     lines = open_csv('word_list.csv')
 
-    # if args['mode'] == 'check':
     occurrences = {'biased_words': []}
     code_quality_report, splunk_events = [], []
     terms_found = False
@@ -211,10 +209,8 @@ def main(args, logger):
             line, occurrences, code_quality_report, splunk_events, args, batch_info, terms_found, logger)
 
     occurrences['terms_found'] = terms_found
-
-    # every JSON in the codeclimate array is a line found
     occurrences['total_lines_matched'] = len(code_quality_report)
-    # dedupes the files and accounts for all words for total count
+
     all_files_matched = []
     occurrences['total_words_matched'] = 0
     for word in occurrences['biased_words']:
@@ -230,7 +226,7 @@ def main(args, logger):
     write_file(constants.SUMMARY_FILENAME, occurrences)
     write_file(constants.CODECLIMATE_FILENAME, code_quality_report)
     err_file = args['err_file']
-    # final error check for check mode
+    # final error check
     if not terms_found:
         sys.stdout.write('%sBiased Lang Linter %sfound no biased words! 🎉%s\n' % (
             c['lightmagenta'], c['green'], c['nc']))
@@ -243,7 +239,7 @@ def main(args, logger):
                 errfile.write(error_message)
 
     if args['splunk_flag']:
-        # Splunk the summarized JSON
+        # Post the summarized JSON to Splunk
         occurrences['content'] = constants.SUMMARY_FILENAME
         occurrences.update(batch_info)
         occurrences['total_lines'] = get_line_count(args['path'], excluded)
