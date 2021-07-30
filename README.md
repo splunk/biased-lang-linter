@@ -1,6 +1,6 @@
 # Description
 
-This is a code linter that checks for biased language in a code repository.
+This is a code linter that checks for biased language in a code repository. Currently the words we are searching for are listed in `word_list.csv`. 
 
 1. [Quickstart](#quickstart)
 2. [Developer Instructions](#developer-instructions)
@@ -68,24 +68,20 @@ Follow these instructions to set up Biased Lang Linter locally for development.
 ### Required Dependencies
 
 - python 3.7+
-- ripgrep (Installation instructions [here](https://github.com/BurntSushi/ripgrep#installation). On MacOS, `brew install ripgrep`.)
-
-### JSON output
-
-**JSON output:** `run_json.py` outputs formatted JSON summaries, can send results to Splunk, and has additional options that are helpful for GitLab CI pipelines.
+- ripgrep (Installation instructions [here](https://github.com/BurntSushi/ripgrep#installation).
 
 ### More on [args]
 
-Unless otherwise noted, all arguments are available for both JSON and standard output. Required arguments: `--path` and `--mode`.
+Below is a list of arguments you can pass to the CLI tool.
+Note: For the additional arguments you find in `run_json.py` that aren't listed below, they are for internal use.
 
 - **`--path=`** [_**required**_] absolute path to the directory
-- **`--mode=`** [_**required**_] `check` to scan for bias language
-- **`--verbose`** enables explicit logging (only applicable for check mode)
 - **`--err_file=`** sends any error messages to a log file of your choice, in addition to the console
-- **`--splunk`** not available yet (Splunk instance required)
-- **`--splunk_token=`** not available yet (Splunk instance required)
-- **`--url=`** not available yet (Splunk instance required)
-- **`--github_repo=`** not available yet (Splunk instance required)
+- **`--splunk`** [_**splunk_required**_] not available yet
+- **`--splunk_token=`** [_**splunk_required**_] not available yet
+- **`--url=`** [_**splunk_required**_] the project url. This will be the `sourcetype` in Splunk.
+- **`--github_repo=`** [_**github_only**_] the repository path for repo's run in GitHub Actions. Also acts as a flag to confirm GitHub environment
+
 
 ### Usage Example
 
@@ -103,13 +99,10 @@ python3 run_json.py --mode=check --path=/user/jdoe/git/myProject
 #### biased-language-summary.json
 
 `biased-language-summary.json` contains a summary of which files contain which biased words.
-(With `--verbose`, this output is capable of line-by-line reporting instead of a summary. The GitLab CI uses the summarized version.)
 
 ```sh
 {
     "terms_found": "true" | "false",
-    "mode": "check",
-    "verbose": "true" | "false",
     "total_lines_matched": "295",
     "total_files_matched": "54",
     "total_words_matched": "449",
@@ -139,15 +132,7 @@ python3 run_json.py --mode=check --path=/user/jdoe/git/myProject
 
 ## Formatting of word_list.csv
 
-When running, `1 to 1` option the `biasedWord` will be directly replaced by the `allowedWord` if `--mode=fix` (Currently not availble).
-When running with many options it won't replace automatically, but it shows your provided options for your context.
-
-```sh
-# 1 to many options
-biasedWord,"option1,option2"
-# 1 to 1 option
-biasedWord,allowedWord
-```
+The biased words are listed on a new line in the `word_list.csv` file.
 
 ## Excluding directories and files
 
@@ -170,3 +155,11 @@ If the pipeline detects biased language anywhere in the repository, the `biased_
 **Q: I'm including git submodules in my repo and seems to be breaking the workflow, what can I do?**
 
 **A:** You'll need to add your submodule paths in the `.biased_lang_exclude` file. You can find info on how to (exclude files and directories here)[#excluding-directories-and-files]
+
+**Q: How can I search for additional biased terms?**
+
+**A:** You'll have to create a fork of this repo and add your new biased word in `word_list.csv` on a new line. You will also need to update the workflow, `.github/workflows/main.yml`, to publish the Docker image outside of Splunk's organization.
+
+## Learn More
+
+- Bias Free Communication: [Splunk Style Guide](https://docs.splunk.com/Documentation/StyleGuide/current/StyleGuide/Inclusivity)

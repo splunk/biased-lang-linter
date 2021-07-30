@@ -32,13 +32,18 @@ binaryornot_logger.setLevel('ERROR')
 chardet_logger = logging.getLogger('chardet')
 chardet_logger.setLevel('ERROR')
 
-
-def get_splunk_hec_info(token):
+def get_hec_info(token, endpoint):
     if not token:
-        raise Exception('No Splunk HEC token provided')
+        raise Exception('Missing Splunk HEC token')
+    if endpoint is None:
+        raise Exception('Missing Splunk endpoint')
+    
+    endpoint = endpoint.split(':')
+    host = endpoint[0]
+    port = endpoint[1]
     return {
-        'hec_host': os.environ['splunk_host'],
-        'hec_port': os.environ['splunk_port'],
+        'hec_host': host,
+        'hec_port': port,
         'hec_key': f'Splunk {token}',
         'hec_index': 'bias_language',
         'hec_protocol': 'https',
@@ -58,23 +63,6 @@ def get_colors():
         'underline': {
             'cyan': '\033[4;36m',
             'lightmagenta': '\033[4;95m'
-        }
-    }
-
-
-def get_colors_sh():
-    return {
-        'text': {
-            'yellow': '\\033[0;33m',
-            'green': '\\033[0;32m',
-            'red': '\\033[0;31m',
-            'lightmagenta': '\\033[0;95m',
-            'orange': '\\033[38;5;172m',
-            'nc': '\\033[0m'
-        },
-        'underline': {
-            'cyan': '\\033[4;36m',
-            'lightmagenta': '\\033[4;95m'
         }
     }
 
@@ -134,8 +122,8 @@ def write_file(file, content):
         outfile.write('\n')
 
 
-# Grabs the org + repo name if in CI environment- ...engprod/biased-language-linter
-# If run locally, will grab the last two parts of the path- ...splunk/biased-language-linter
+# Grabs the org + repo name if in CI environment- engprod/biased-lang
+# If run locally, will grab the last two parts of the path- splunk/biased-lang
 def grab_repo_name(path):
     subpath = path[:path.rindex('/')]
     if not subpath:

@@ -26,7 +26,7 @@ sys.stdout.write('Triggering GitHub Workflow...\n')
 r = requests.post('https://api.github.com/repos/splunk/test-biased-lang/actions/workflows/main.yml/dispatches', headers=headers, data=json.dumps({"ref": "main"}))
 
 def get_total_runs():
-  return requests.get('https://api.github.com/repos/splunk/test-biased-lang/actions/workflows/8382216/runs?status=completed', headers=headers).json()
+  return requests.get('https://api.github.com/repos/splunk/test-biased-lang/actions/workflows/main.yml/runs?status=completed', headers=headers).json()
 
 if r.status_code >= 400:
   print(f'Failed to trigger GitHub Workflow. Status Code: {r.status_code}')
