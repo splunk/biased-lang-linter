@@ -80,20 +80,20 @@ jobs:
           file: Dockerfile.gh
           push: true
           tags: ghcr.io/splunk/biased_lang:1.0.0
-  # gitlab_docker_build_publish_prod:
-  #   runs-on: ubuntu-latest
-  #   needs: test
-  #   steps:
-  #     - name: Login to GitHub Container Registry
-  #       uses: docker/login-action@v1.10.0
-  #       with:
-  #         registry: ghcr.io
-  #         username: ${{ github.actor }}
-  #         password: ${{ secrets.GITHUB_TOKEN }}
-  #         logout: true
-  #     - name: Docker build and push gitlab image to ghcr.io
-  #       uses: docker/build-push-action@v2
-  #       with:
-  #         file: Dockerfile.gl
-  #         push: true
-  #         tags: ghcr.io/splunk/biased_lang_gitlab:1.0.0
+  gitlab_docker_build_publish_prod:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1.10.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          logout: true
+      - name: Docker build and push gitlab image to ghcr.io
+        uses: docker/build-push-action@v2
+        with:
+          file: Dockerfile.gl
+          push: true
+          tags: ghcr.io/splunk/biased_lang_gitlab:1.0.0
