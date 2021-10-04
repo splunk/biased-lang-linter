@@ -262,6 +262,7 @@ def main(args, logger):
 
 
 if __name__ == '__main__':
+    print("TEST_TAG")
     args = build_args_dict()
     logger = BiasedLanguageLogger(
         name='BiasedLanguageLogger', filename=constants.LOG_FILE)
