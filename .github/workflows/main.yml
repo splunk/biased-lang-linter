@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4.1.0
         with:
           python-version: '3.7'
       - name: Run Pytest
@@ -55,7 +55,7 @@ jobs:
       needs: github_docker_build_publish_test
       steps:
         - uses: actions/checkout@v2
-        - uses: actions/setup-python@v2
+        - uses: actions/setup-python@v4.1.0
           with:
             python-version: '3.7'
         - name: Test biased_lang:test image
