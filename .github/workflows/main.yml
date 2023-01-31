@@ -45,7 +45,7 @@ jobs:
             password: ${{ secrets.GITHUB_TOKEN }}
             logout: true
         - name: Docker build and push test to ghcr.io
-          uses: docker/build-push-action@v2
+          uses: docker/build-push-action@v4
           with:
             file: Dockerfile.gh
             push: true
@@ -75,7 +75,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           logout: true
       - name: Docker build and push prod to ghcr.io
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4
         with:
           file: Dockerfile.gh
           push: true
@@ -92,7 +92,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           logout: true
       - name: Docker build and push gitlab image to ghcr.io
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4
         with:
           file: Dockerfile.gl
           push: true
