@@ -31,7 +31,7 @@ biased_lang:
     runs-on: ubuntu-latest
     name: Detecting Biased Language
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - id: biased-lang-linter
         uses: splunk/biased-lang-linter@main
         continue-on-error: true
@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Detecting Biased Language
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - id: biased-lang-linter
         uses: splunk/biased-lang-linter@main
         continue-on-error: true
